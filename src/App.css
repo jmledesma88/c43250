@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+.userSection {
+    display: flex;
+    justify-content: space-evenly;
+}

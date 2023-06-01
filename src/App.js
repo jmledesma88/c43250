@@ -20,6 +20,9 @@ class App extends Component {
         return(
             <div className="App">
                 <Header/>
+                <Header title="Soy un título a partir de una prop" color="red" />
+                <div className="userSection"></div>
+                {/* 3:44 */}
             </div>
         );
     }
