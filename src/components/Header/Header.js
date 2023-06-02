@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Header.css";
 
-import icons from "../assets/icons/iconos.png";
+import icons from "../../assets/icons/iconos.png";
 
 const Header = (props) => {
   return (
