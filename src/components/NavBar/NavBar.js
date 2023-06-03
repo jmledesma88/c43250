@@ -1,17 +1,46 @@
 import React from 'react';
 import "./NavBar.css";
+import CartWidget from '../CartWidget/CartWidget';
 
 const NavBar = () => {
-  return (
-    <nav>
-        <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-            <li></li>
-        </ul>
-    </nav>
-  )
+    return (
+        <div className='container-xxl d-flex'>
+            <div id='navbar' className='row w-100'>
+            <nav className="navbar navbar-expand-lg bg-light">
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="#">CothingCo</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Shop
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li><a className="dropdown-item" href="#">Men</a></li>
+                                    <li><a className="dropdown-item" href="#">Women</a></li>
+                                    <li><a className="dropdown-item" href="#">Sale</a></li>
+                                </ul>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">About</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                            <CartWidget className="justify-content-end flex-shrink-1"/>
+            </nav>
+            </div>
+        </div>
+    )
 }
 
 export default NavBar;
