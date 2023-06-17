@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ItemDetailContainer from "../../components/ItemDetailContainer/ItemDetailContainer";
+import {Link} from "react-router-dom";
 
 const CategoryPage = () => {
   const [items, setItems] = useState([]);
@@ -34,7 +35,9 @@ const CategoryPage = () => {
         {filteredItems.map((item) => {
           return (
             <div key={item.id} className="col d-flex m-3">
-              <ItemDetailContainer item={item} />
+              <Link to={`/detail/${item.id}`}>
+                <ItemDetailContainer item={item} />
+              </Link>
             </div>
           );
         })}
