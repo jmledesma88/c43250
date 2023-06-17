@@ -1,11 +1,11 @@
 import React from "react";
-// import ListUser from "../../components/ListUser/ListUser";
+import ItemListContainer from "../../components/ItemListContainer/ItemListContainer";
 
 const HomePage = () => {
   return (
-    <div>
-      {/* <h1>Characters Rick & Morty!</h1>
-      <ListUser /> */}
+    <div className="container-xxl">
+      <h1 className="text-center mt-3">Home</h1>
+      <ItemListContainer />
     </div>
   );
 };

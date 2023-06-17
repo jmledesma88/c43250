@@ -1,39 +1,46 @@
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-// import { useParams } from "react-router-dom";
-// // import CardUser from "../../components/CardUser/CardUser";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import ItemDetailContainer from "../../components/ItemDetailContainer/ItemDetailContainer";
 
-// const Category = () => {
-//   const [chars, setChars] = useState([]);
+const CategoryPage = () => {
+  const [items, setItems] = useState([]);
 
-//   let { categoryId } = useParams();
+  let { categoryId } = useParams();
 
-//   console.log("categoryId", categoryId);
-//   console.log("chars", chars);
+  let filteredItems = items.filter((item) => {
+    return item.category === categoryId;
+  });
 
-//   let filteredCharacters = chars.filter((char) => {
-//     return char.species === categoryId;
-//   });
+  useEffect(() => {
+    axios(`${process.env.REACT_APP_BASE_URL}`).then((json) =>
+      setItems(json.data)
+    );
+  }, []);
 
-//   console.log("filteredCharacters", filteredCharacters);
+  const titleStringArray = categoryId
+    .split(" ")
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
 
-//   useEffect(() => {
-//     axios(`${process.env.REACT_APP_BASE_URL}`).then((json) =>
-//       setChars(json.data.results)
-//     );
-//   }, []);
+  return (
+    <div className="container-xxl">
+      <div className="row text-center">
+        <h1 className="mt-3">{titleStringArray}</h1>
+      </div>
+      <div className="row row-cols-2 row-cols-md-4 row-cols-lg-5 justify-content-center">
+        {filteredItems.map((item) => {
+          return (
+            <div key={item.id} className="col d-flex m-3">
+              <ItemDetailContainer item={item} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
-//   return (
-//     <div className="Cards-List">
-//       {filteredCharacters.map((char) => {
-//         return (
-//           <div style={{ margin: 10 }} key={char.id}>
-//             <CardUser char={char} />
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
-// };
-
-// export default Category;
+export default CategoryPage;

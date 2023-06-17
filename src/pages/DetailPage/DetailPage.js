@@ -1,26 +1,25 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import ItemDetailContainer from "../../components/ItemDetailContainer/ItemDetailContainer";
 
-import { useParams } from "react-router-dom";
-
 const DetailPage = () => {
-  const [char, setChar] = useState({});
+  const [item, setItem] = useState({});
 
   let { id } = useParams();
 
-  console.log(char);
-
   useEffect(() => {
-    axios(`https://fakestoreapi.com/products/`).then((json) =>
-      setChar(json.data)
+    axios(`${process.env.REACT_APP_BASE_URL}/${id}`).then((json) =>
+      setItem(json.data)
     );
   }, [id]);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", margin: 20 }}>
-      {char.id ? <ItemDetailContainer char={char} /> : null}
+    <div className="container-xxl" key={id}>
+      <div className="row justify-content-center mt-4">
+        {item.id ? <ItemDetailContainer item={item} /> : null}
+      </div>
     </div>
   );
 };
