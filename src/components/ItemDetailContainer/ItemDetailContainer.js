@@ -10,7 +10,7 @@ const ItemDetailContainer = ({ item }) => {
 const { image, title, category, rating, price } = item;
 
   return (
-    <Card sx={{ maxWidth: 250 }}>
+    <Card className="ItemDetailContainer">
       <CardActionArea>
         <CardMedia component="img" image={image} alt={title} />
         <CardContent>

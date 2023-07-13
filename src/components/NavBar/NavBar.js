@@ -56,7 +56,7 @@ const NavBar = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" id="NavBar">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -119,6 +119,7 @@ const NavBar = () => {
                             <Accordion
                                 expanded={expanded === "panel1"}
                                 onChange={handleChange("panel1")}
+                                className="panel1"
                             >
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}

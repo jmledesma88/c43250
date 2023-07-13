@@ -15,11 +15,10 @@ const ItemListContainer = () => {
   }, []);
 
   return (
-    <div className="container-xxl">
-      <div className="row row-cols-2 row-cols-md-4 row-cols-lg-5 justify-content-center">
+      <div className="ItemListContainer">
         {items.map((item) => {
           return (
-            <div key={item.id} className="col d-flex m-3">
+            <div key={item.id}>
               <Link to={`/detail/${item.id}`}>
                 <ItemDetailContainer item={item} />
               </Link>
@@ -27,7 +26,6 @@ const ItemListContainer = () => {
             </div>
           );
         })}
-      </div>
     </div>
   );
 };

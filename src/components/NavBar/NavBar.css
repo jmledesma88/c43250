@@ -1,8 +1,17 @@
-#navbar{
-    height: 10vh;
+#NavBar{
+    background-color:gray;
 }
 a {
     color: inherit;
     text-decoration: none;
 
 }
+.panel1{
+    box-shadow: none !important;
+}
+/* .MuiAccordionSummary-content{
+    margin: 6px 0px !important;
+}
+.MuiAccordionSummary-gutters{
+    height: 36px !important;
+} */

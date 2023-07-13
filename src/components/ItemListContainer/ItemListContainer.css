@@ -1,0 +1,40 @@
+.ItemListContainer{
+    margin: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+}
+
+
+/* @media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+    .ItemListContainer {
+        margin: 0px 80px;
+
+    }
+
+}
+
+@media (min-width: 1200px) { 
+    .ItemListContainer {
+        margin: 0px 100px;
+
+    }
+
+}
+
+@media (min-width: 1400px) { 
+    .ItemListContainer {
+        margin: 0px 120px;
+
+    }
+
+} */
