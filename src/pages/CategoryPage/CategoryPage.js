@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ItemDetailContainer from "../../components/ItemDetailContainer/ItemDetailContainer";
-import { Link } from "react-router-dom";
-
 import { db } from "../../firebase/firebaseConfig";
 import {collection, query, getDocs, where} from "firebase/firestore";
+import ItemListContainer from "../../components/ItemListContainer/ItemListContainer";
 
 
 const CategoryPage = () => {
@@ -20,13 +18,13 @@ const CategoryPage = () => {
             querySnapshot.forEach((doc) => {
                 docs.push({ ...doc.data(), id: doc.id });
             });
-            console.log(docs);
             setItems(docs);
         };
         getItems();
     }, [categoryId]);
 
-        
+
+    // Pasar las iniciales a mayúsculas
     const titleStringArray = categoryId
         .split(" ")
         .map((word) => {
@@ -40,15 +38,7 @@ const CategoryPage = () => {
                 <h1>{titleStringArray}</h1>
             </div>
             <div>
-                {items.map((item) => {
-                    return (
-                        <div key={item.id}>
-                            <Link to={`/detail/${item.id}`}>
-                                <ItemDetailContainer item={item} />
-                            </Link>
-                        </div>
-                    );
-                })}
+                <ItemListContainer items={items}/>
             </div>
         </div>
     );

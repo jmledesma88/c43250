@@ -21,7 +21,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const settings = ["View Cart", "Empty Cart"];
+// const settings = ["View Cart", "Empty Cart"];
 const categories = [
     "men's clothing",
     "women's clothing",
@@ -38,7 +38,7 @@ const NavBar = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElShop, setAnchorElShop] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -46,9 +46,9 @@ const NavBar = () => {
     const handleOpenShopMenu = (event) => {
         setAnchorElShop(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
+    // const handleOpenUserMenu = (event) => {
+    //     setAnchorElUser(event.currentTarget);
+    // };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
@@ -57,9 +57,9 @@ const NavBar = () => {
     const handleCloseShopMenu = () => {
         setAnchorElShop(null);
     };
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+    // const handleCloseUserMenu = () => {
+    //     setAnchorElUser(null);
+    // };
 
     return (
         <AppBar position="static" id="NavBar">
@@ -117,11 +117,13 @@ const NavBar = () => {
                                 display: { xs: "block", md: "none" },
                             }}
                         >
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <Link to="/">Home</Link>
-                                </Typography>
-                            </MenuItem>
+                            <Link to="/">
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        Home
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
                             <Accordion
                                 expanded={expanded === "panel1"}
                                 onChange={handleChange("panel1")}
@@ -136,31 +138,35 @@ const NavBar = () => {
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     {categories.map((category) => (
-                                        <MenuItem
+                                        <Link
+                                            to={`/category/${category}`}
                                             key={category}
-                                            onClick={handleCloseNavMenu}
                                         >
-                                            <Typography textAlign="center">
-                                                <Link
-                                                    to={`/category/${category}`}
-                                                >
+                                            <MenuItem
+                                                onClick={handleCloseNavMenu}
+                                            >
+                                                <Typography textAlign="center">
                                                     {category}
-                                                </Link>
-                                            </Typography>
-                                        </MenuItem>
+                                                </Typography>
+                                            </MenuItem>
+                                        </Link>
                                     ))}
                                 </AccordionDetails>
                             </Accordion>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <Link to="/about">About</Link>
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <Link to="/contact">Contact</Link>
-                                </Typography>
-                            </MenuItem>
+                            <Link to="/about">
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        About
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
+                            <Link to="/contact">
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        Contact
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
                         </Menu>
                     </Box>
 
@@ -188,12 +194,14 @@ const NavBar = () => {
                             display: { xs: "none", md: "flex" },
                         }}
                     >
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: "white", display: "block" }}
-                        >
-                            <Link to="/">Home</Link>
-                        </Button>
+                        <Link to="/">
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: "white", display: "block" }}
+                            >
+                                Home
+                            </Button>
+                        </Link>
 
                         <Box>
                             <Tooltip>
@@ -225,36 +233,48 @@ const NavBar = () => {
                                 onClose={handleCloseShopMenu}
                             >
                                 {categories.map((category) => (
-                                    <MenuItem
+                                    <Link
+                                        to={`/category/${category}`}
                                         key={category}
-                                        onClick={handleCloseShopMenu}
                                     >
-                                        <Typography textAlign="center">
-                                            <Link to={`/category/${category}`}>
+                                        <MenuItem onClick={handleCloseShopMenu}>
+                                            <Typography textAlign="center">
                                                 {category}
-                                            </Link>
-                                        </Typography>
-                                    </MenuItem>
+                                            </Typography>
+                                        </MenuItem>
+                                    </Link>
                                 ))}
                             </Menu>
                         </Box>
 
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: "white", display: "block" }}
-                        >
-                            <Link to="/About">About</Link>
-                        </Button>
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: "white", display: "block" }}
-                        >
-                            <Link to="/Contact">Contact</Link>
-                        </Button>
+                        <Link to="/About">
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: "white", display: "block" }}
+                            >
+                                About
+                            </Button>
+                        </Link>
+                        <Link to="/Contact">
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: "white", display: "block" }}
+                            >
+                                Contact
+                            </Button>
+                        </Link>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Cart Options">
+                        <Link to="/cart">
+                        <IconButton title="View Cart"
+                                sx={{ p: 0 }}
+                            >
+                                <CartWidget />
+                            </IconButton>
+
+                        </Link>
+                        {/* <Tooltip title="Cart Options">
                             <IconButton
                                 onClick={handleOpenUserMenu}
                                 sx={{ p: 0 }}
@@ -288,7 +308,7 @@ const NavBar = () => {
                                     </Typography>
                                 </MenuItem>
                             ))}
-                        </Menu>
+                        </Menu> */}
                     </Box>
                 </Toolbar>
             </Container>

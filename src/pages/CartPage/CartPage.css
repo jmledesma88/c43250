@@ -1,0 +1,8 @@
+.CartForm{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.CartFormInput{
+    max-width: 320px;
+    margin: 10px !important;
+}
