@@ -7,7 +7,7 @@ const ItemListContainer = (list) => {
     const {items} = list;
 
     return (
-        <div className="ItemListContainer">
+        <div className="ItemListContainer">            
             {items.map((item) => {
                 return (
                     <div key={item.id}>

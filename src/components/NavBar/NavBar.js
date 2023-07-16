@@ -1,8 +1,9 @@
-import * as React from "react";
+import { useContext, useState } from "react";
 
 import "./NavBar.css";
 import CartWidget from "../CartWidget/CartWidget";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,13 +16,11 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-// const settings = ["View Cart", "Empty Cart"];
 const categories = [
     "men's clothing",
     "women's clothing",
@@ -30,15 +29,14 @@ const categories = [
 ];
 
 const NavBar = () => {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElShop, setAnchorElShop] = React.useState(null);
-    // const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElShop, setAnchorElShop] = useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -46,9 +44,6 @@ const NavBar = () => {
     const handleOpenShopMenu = (event) => {
         setAnchorElShop(event.currentTarget);
     };
-    // const handleOpenUserMenu = (event) => {
-    //     setAnchorElUser(event.currentTarget);
-    // };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
@@ -57,9 +52,9 @@ const NavBar = () => {
     const handleCloseShopMenu = () => {
         setAnchorElShop(null);
     };
-    // const handleCloseUserMenu = () => {
-    //     setAnchorElUser(null);
-    // };
+
+    const [cart] = useContext(CartContext);
+
 
     return (
         <AppBar position="static" id="NavBar">
@@ -68,8 +63,6 @@ const NavBar = () => {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href="/"
                         sx={{
                             mr: 2,
                             display: { xs: "none", md: "flex" },
@@ -173,8 +166,6 @@ const NavBar = () => {
                     <Typography
                         variant="h5"
                         noWrap
-                        component="a"
-                        href=""
                         sx={{
                             mr: 2,
                             display: { xs: "flex", md: "none" },
@@ -267,48 +258,11 @@ const NavBar = () => {
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Link to="/cart">
-                        <IconButton title="View Cart"
-                                sx={{ p: 0 }}
-                            >
+                            <IconButton title="View Cart" sx={{ p: 0 }}>
                                 <CartWidget />
+                                {cart.length}
                             </IconButton>
-
                         </Link>
-                        {/* <Tooltip title="Cart Options">
-                            <IconButton
-                                onClick={handleOpenUserMenu}
-                                sx={{ p: 0 }}
-                            >
-                                <CartWidget />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: "45px" }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem
-                                    key={setting}
-                                    onClick={handleCloseUserMenu}
-                                >
-                                    <Typography textAlign="center">
-                                        {setting}
-                                    </Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu> */}
                     </Box>
                 </Toolbar>
             </Container>
