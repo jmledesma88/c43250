@@ -1,13 +1,21 @@
-import * as React from "react";
+import { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Button } from "@mui/material";
 import "./ItemDetailContainer.css";
+import { QtyPicker, CartContext } from "../../context/CartContext";
 
 const ItemDetailContainer = ({ item }) => {
-    const { img, title, category, description, price } = item;
+    const { id, img, title, category, description, price } = item;
+
+    const [cart, setCart] = useContext(CartContext);
+    console.log(cart)
+    const addToCart = () => {
+        setCart("hola")
+    }
+    // docs.push({ ...doc.data(), id: doc.id });
 
     return (
         <Card className="ItemDetailContainer">
@@ -25,6 +33,12 @@ const ItemDetailContainer = ({ item }) => {
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
                         {description}
+                    </Typography>
+                    <Typography>
+                        <QtyPicker />
+                    </Typography>
+                    <Typography>
+                        <Button onClick={addToCart}>Add to cart</Button>
                     </Typography>
                 </CardContent>
             </CardActionArea>

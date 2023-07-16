@@ -54,7 +54,13 @@ const NavBar = () => {
     };
 
     const [cart] = useContext(CartContext);
-
+    // let totalPrice = 0;
+    let totalQty = 0;
+    
+    cart.forEach(item=>{
+        // totalPrice+= prod.qty*prod.itemPrice;
+        totalQty+= item.qty;
+    })
 
     return (
         <AppBar position="static" id="NavBar">
@@ -260,7 +266,7 @@ const NavBar = () => {
                         <Link to="/cart">
                             <IconButton title="View Cart" sx={{ p: 0 }}>
                                 <CartWidget />
-                                {cart.length}
+                                {totalQty>0 ? totalQty : null}
                             </IconButton>
                         </Link>
                     </Box>
