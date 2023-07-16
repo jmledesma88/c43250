@@ -4,27 +4,24 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import "./ItemDetailContainer.css";
+import "./ItemPrevContainer.css";
 
-const ItemDetailContainer = ({ item }) => {
-    const { img, title, category, description, price } = item;
+const ItemPrevContainer = ({ item }) => {
+    const { img, title, category, price } = item;
 
     return (
-        <Card className="ItemDetailContainer">
+        <Card className="ItemPrevContainer">
             <CardActionArea>
                 <CardMedia component="img" image={img} alt={title} />
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
                         {title}
                     </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                        {category}
-                    </Typography>
                     <Typography variant="body1" color="text.primary">
                         ${price}
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
-                        {description}
+                        {category}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -32,4 +29,4 @@ const ItemDetailContainer = ({ item }) => {
     );
 };
 
-export default ItemDetailContainer;
+export default ItemPrevContainer;

@@ -1,40 +1,33 @@
-.ItemListContainer{
+.ItemListContainer {
     margin: 5px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+.ItemDiv {
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    
+    justify-content: center;
 }
 
-
-/* @media (min-width: 576px) {
-
-}
-
-@media (min-width: 768px) {
-
-}
-
-@media (min-width: 992px) {
+@media (min-width: 526px) {
     .ItemListContainer {
-        margin: 0px 80px;
-
+        margin: 5px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
-@media (min-width: 1200px) { 
+@media (min-width: 900px) {
     .ItemListContainer {
-        margin: 0px 100px;
-
+        margin: 5px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
-
 }
 
-@media (min-width: 1400px) { 
+@media (min-width: 1050px) {
     .ItemListContainer {
-        margin: 0px 120px;
-
+        margin: 5px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
     }
-
-} */
+}

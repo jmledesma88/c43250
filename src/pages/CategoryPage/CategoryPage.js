@@ -1,24 +1,32 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import ItemDetailContainer from "../../components/ItemDetailContainer/ItemDetailContainer";
 import { Link } from "react-router-dom";
+
+import { db } from "../../firebase/firebaseConfig";
+import {collection, query, getDocs, where} from "firebase/firestore";
+
 
 const CategoryPage = () => {
     const [items, setItems] = useState([]);
 
     let { categoryId } = useParams();
 
-    let filteredItems = items.filter((item) => {
-        return item.category === categoryId;
-    });
-
     useEffect(() => {
-        axios(`${process.env.REACT_APP_BASE_URL}`).then((json) =>
-            setItems(json.data)
-        );
-    }, []);
+        const getItems = async () => {
+            const q = query(collection(db, "items"), where ("category", "==", categoryId));
+            const querySnapshot = await getDocs(q);
+            const docs = [];
+            querySnapshot.forEach((doc) => {
+                docs.push({ ...doc.data(), id: doc.id });
+            });
+            console.log(docs);
+            setItems(docs);
+        };
+        getItems();
+    }, [categoryId]);
 
+        
     const titleStringArray = categoryId
         .split(" ")
         .map((word) => {
@@ -32,7 +40,7 @@ const CategoryPage = () => {
                 <h1>{titleStringArray}</h1>
             </div>
             <div>
-                {filteredItems.map((item) => {
+                {items.map((item) => {
                     return (
                         <div key={item.id}>
                             <Link to={`/detail/${item.id}`}>

@@ -15,10 +15,12 @@ import DetailPage from "./pages/DetailPage/DetailPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
+import { Container } from '@mui/material';
+
 const App = () => {
   return (
     <Router>
-      <div className="App">
+      <Container className="App" maxWidth="xl">
         <NavBar />
         <Routes>
           <Route exact path="/" element={<HomePage />} />
@@ -32,7 +34,7 @@ const App = () => {
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-      </div>
+      </Container>
     </Router>
   );
 };

@@ -22,6 +22,12 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const settings = ["View Cart", "Empty Cart"];
+const categories = [
+    "men's clothing",
+    "women's clothing",
+    "accesories",
+    "watches",
+];
 
 const NavBar = () => {
     const [expanded, setExpanded] = React.useState(false);
@@ -129,34 +135,20 @@ const NavBar = () => {
                                     <Typography>Shop</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">
-                                            <Link to="/category/men's%20clothing">
-                                                Men's Clothing
-                                            </Link>
-                                        </Typography>
-                                    </MenuItem>
-                                    <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">
-                                            <Link to="/category/women's%20clothing">
-                                                Women's Clothing
-                                            </Link>
-                                        </Typography>
-                                    </MenuItem>
-                                    <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">
-                                            <Link to="/category/jewelery">
-                                                Jewelery
-                                            </Link>
-                                        </Typography>
-                                    </MenuItem>
-                                    <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">
-                                            <Link to="/category/electronics">
-                                                Electronics
-                                            </Link>
-                                        </Typography>
-                                    </MenuItem>
+                                    {categories.map((category) => (
+                                        <MenuItem
+                                            key={category}
+                                            onClick={handleCloseNavMenu}
+                                        >
+                                            <Typography textAlign="center">
+                                                <Link
+                                                    to={`/category/${category}`}
+                                                >
+                                                    {category}
+                                                </Link>
+                                            </Typography>
+                                        </MenuItem>
+                                    ))}
                                 </AccordionDetails>
                             </Accordion>
                             <MenuItem onClick={handleCloseNavMenu}>
@@ -232,34 +224,18 @@ const NavBar = () => {
                                 open={Boolean(anchorElShop)}
                                 onClose={handleCloseShopMenu}
                             >
-                                <MenuItem onClick={handleCloseShopMenu}>
-                                    <Typography textAlign="center">
-                                        <Link to="/category/men's%20clothing">
-                                            Men's Clothing
-                                        </Link>
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={handleCloseShopMenu}>
-                                    <Typography textAlign="center">
-                                        <Link to="/category/women's%20clothing">
-                                            Women's Clothing
-                                        </Link>
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={handleCloseShopMenu}>
-                                    <Typography textAlign="center">
-                                        <Link to="/category/jewelery">
-                                            Jewelery
-                                        </Link>
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={handleCloseShopMenu}>
-                                    <Typography textAlign="center">
-                                        <Link to="/category/electronics">
-                                            Electronics
-                                        </Link>
-                                    </Typography>
-                                </MenuItem>
+                                {categories.map((category) => (
+                                    <MenuItem
+                                        key={category}
+                                        onClick={handleCloseShopMenu}
+                                    >
+                                        <Typography textAlign="center">
+                                            <Link to={`/category/${category}`}>
+                                                {category}
+                                            </Link>
+                                        </Typography>
+                                    </MenuItem>
+                                ))}
                             </Menu>
                         </Box>
 

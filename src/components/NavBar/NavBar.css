@@ -1,5 +1,7 @@
 #NavBar{
-    background-color:gray;
+    background-color:gray !important;
+    /* max-width: 1000px;
+    display: flex; */
 }
 a {
     color: inherit;
@@ -9,9 +11,10 @@ a {
 .panel1{
     box-shadow: none !important;
 }
-/* .MuiAccordionSummary-content{
-    margin: 6px 0px !important;
-}
-.MuiAccordionSummary-gutters{
-    height: 36px !important;
-} */
+
+@media (min-width: 300px)
+{
+#NavBar {
+    padding-left: 24px;
+    padding-right: 24px;
+}}

@@ -1,27 +1,50 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import "./DetailPage.css";
 
 import ItemDetailContainer from "../../components/ItemDetailContainer/ItemDetailContainer";
 
+import { db } from "../../firebase/firebaseConfig";
+import {
+    collection,
+    query,
+    getDocs,
+    where,
+    documentId,
+} from "firebase/firestore";
+
 const DetailPage = () => {
-  const [item, setItem] = useState({});
+    const [selectedItem, setSelectedItem] = useState([]);
 
-  let { id } = useParams();
+    let { id } = useParams();
 
-  useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/${id}`).then((json) =>
-      setItem(json.data)
+    useEffect(() => {
+        const getItem = async () => {
+            const q = query(
+                collection(db, "items"),
+                where(documentId(), "==", id)
+            );
+            const querySnapshot = await getDocs(q);
+            const docs = [];
+            querySnapshot.forEach((doc) => {
+                docs.push({ ...doc.data(), id: doc.id });
+            });
+            setSelectedItem(docs);
+        };
+        getItem();
+    }, [id]);
+
+    return (
+        <div className="DetailPage">
+            {selectedItem.map((item) => {
+                return (
+                    <div key={item.id}>
+                        <ItemDetailContainer item={item} />
+                    </div>
+                );
+            })}
+        </div>
     );
-  }, [id]);
-
-  return (
-    <div className="container-xxl" key={id}>
-      <div className="row justify-content-center mt-4">
-        {item.id ? <ItemDetailContainer item={item} /> : null}
-      </div>
-    </div>
-  );
 };
 
 export default DetailPage;
