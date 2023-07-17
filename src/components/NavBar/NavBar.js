@@ -57,10 +57,10 @@ const NavBar = () => {
     // let totalPrice = 0;
     let totalQty = 0;
     
-    cart.forEach(item=>{
-        // totalPrice+= prod.qty*prod.itemPrice;
-        totalQty+= item.qty;
-    })
+    // cart && cart.forEach(item=>{
+    //     // totalPrice+= prod.qty*prod.itemPrice;
+    //     totalQty+= item.qty;
+    // })
 
     return (
         <AppBar position="static" id="NavBar">
