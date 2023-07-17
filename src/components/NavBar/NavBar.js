@@ -53,12 +53,13 @@ const NavBar = () => {
         setAnchorElShop(null);
     };
 
-    const [cart] = useContext(CartContext);
-    // let totalPrice = 0;
-    let totalQty = 0;
+    const {totalQty} = useContext(CartContext);
+    // let totalQty = 0;
     
+
     // cart && cart.forEach(item=>{
-    //     // totalPrice+= prod.qty*prod.itemPrice;
+    // cart.forEach(item=>{
+    // //     // totalPrice+= item.qty*item.price;
     //     totalQty+= item.qty;
     // })
 

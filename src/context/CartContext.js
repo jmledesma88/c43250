@@ -5,39 +5,21 @@ export const CartContext = createContext();
 
 
 const emptyCart = [];
+const startQty = 0
 
 export const CartProvider = ({children}) => {
     const [cart, setCart] = useState(emptyCart);
+    const [totalQty, setTotalQty] = useState(startQty)
 
-    return <CartContext.Provider value={[cart, setCart]}>
+    // cart.forEach(item=>{
+    // //     // totalPrice+= item.qty*item.price;
+    //     totalQty = 0;
+    //     totalQty+= item.qty;
+    //     console.log(totalQty)
+    // })
+
+    return (<CartContext.Provider value={{ cart, setCart, totalQty, setTotalQty }}>
         {children}
-    </CartContext.Provider>
+    </CartContext.Provider>)
 }
 
-
-
-// Botones de sumar y restar producto
-
-// const defaultQty = 1;
-
-// export const QtyPicker = () => {
-//     const [qty, setQty] = useState(defaultQty);
-
-//     const minus = () => {
-//         if(qty>1){
-//             setQty(qty-1);
-//         }
-//     }
-
-//     const plus = () => {
-//         setQty(qty+1);
-//     }
-
-//     return (
-//         <ButtonGroup variant="outlined" aria-label="outlined button group">
-//             <Button onClick={minus}>-</Button>
-//             <Button style={{ pointerEvents: 'none' }}>{qty}</Button>
-//             <Button onClick={plus}>+</Button>
-//         </ButtonGroup>
-//     );
-// };
