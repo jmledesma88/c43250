@@ -19,7 +19,7 @@ const ItemPrevContainer = ({ item }) => {
     }, []);
 
     return (
-        <div data-aos="fade-up" data-aos-duration="1000">
+        <div data-aos="fade-up" data-aos-duration="1500">
             <Card className="ItemPrevContainer">
                 <CardActionArea>
                     <CardMedia component="img" image={img} alt={title} />

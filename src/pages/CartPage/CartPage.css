@@ -1,18 +1,51 @@
 /* .CartPage{
 } */
-
 .CartReview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     grid-area: review;
+
+}
+
+.CartCard{
+    /* display: flex; */
+    height: 200px;
+    max-width: 700px;
+
+}
+
+.CartCardGrid{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "thmb summary";
+}
+.thmb{
+    grid-area: thmb;
+    height: 160px;
+    width: 160px;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.summary{
+    grid-area: summary;
+    
+}
+.deleteBtn{
+    margin: 0px 20px;
 }
 
 .CartForm{
     /* display: grid;
     grid-template-columns: 1fr; */
+    margin-top: 20px;
     grid-area: form;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .CartFormInput{
@@ -21,11 +54,19 @@
 }
 
 
-
 @media (min-width: 900px){
     .CartPage{
         display: grid;
-        grid-template-columns: 1.5fr 1fr;
+        grid-template-columns: 2fr 1fr;
         grid-template-areas: "review form";
+    }
+    .CartReview{
+        margin-right:  40px;
+        margin-left: 75px;
+        align-items: end;
+    }
+    .CartForm{
+        margin-top: 0px;
+        align-items: start;
     }
 }

@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 import "./ItemDetailContainer.css";
 import { CartContext } from "../../context/CartContext";
 
@@ -48,7 +48,7 @@ const ItemDetailContainer = ({ item }) => {
 
     return (
         <Card className="ItemDetailContainer">
-            <CardActionArea>
+            {/* <CardActionArea> */}
                 <CardMedia component="img" image={img} alt={title} />
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
@@ -88,7 +88,7 @@ const ItemDetailContainer = ({ item }) => {
                         </Button>
                     </div>
                 </CardContent>
-            </CardActionArea>
+            {/* </CardActionArea> */}
         </Card>
     );
 };
