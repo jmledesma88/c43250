@@ -15,7 +15,7 @@ const ItemDetailContainer = ({ item }) => {
     const [qty, setQty] = useState(defaultQty);
 
     // traigo carrito del context
-    const { cart, setCart, setTotalQty } = useContext(CartContext);
+    const { cart, setCart, setTotalQty, setAddToCart } = useContext(CartContext);
     // console.log(cart);
 
     // calculo la cantidad de artículos actual en el carrito
@@ -23,6 +23,11 @@ const ItemDetailContainer = ({ item }) => {
     cart.forEach((item) => {
         total += item.qty;
     });
+
+    const algo = {
+        id: item.id,
+        qty: qty
+    }
 
     const AddToCart = () => {
         let alreadyInCart = cart.findIndex((i) => i.id === id);
@@ -86,6 +91,7 @@ const ItemDetailContainer = ({ item }) => {
                         <Button onClick={() => AddToCart()} id={id}>
                             Add to cart
                         </Button>
+                        <Button onClick={() => setAddToCart(algo)}>Update Cart</Button>
                     </div>
                 </CardContent>
             {/* </CardActionArea> */}
