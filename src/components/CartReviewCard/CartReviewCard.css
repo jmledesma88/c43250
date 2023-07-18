@@ -1,0 +1,28 @@
+.CartCard{
+    /* display: flex; */
+    height: 200px;
+    max-width: 700px;
+    margin: 0px 20px 20px 20px;
+
+}
+
+.CartCardGrid{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "thmb summary";
+}
+.thmb{
+    grid-area: thmb;
+    height: 160px;
+    width: 160px;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.summary{
+    grid-area: summary;
+    
+}
+.deleteBtn{
+    margin: 0px 10px;
+}

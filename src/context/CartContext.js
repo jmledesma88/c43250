@@ -7,9 +7,12 @@ const emptyCart = [];
 const startQty = 0;
 
 const cart0 = {
-    id: "",
-    qty: 0,
-}
+    id: "render",
+    // img: "",
+    // title: "",
+    // price: 0,
+    // qty: 0,
+};
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(emptyCart);
@@ -17,31 +20,43 @@ export const CartProvider = ({ children }) => {
 
     const [addToCart, setAddToCart] = useState(cart0);
 
-    useEffect(()=>{
-        console.log("updateCart actualizado");
-        console.log(addToCart);
 
-        // modificar para agregar al carrito
+    useEffect(() => {
+        console.log("addToCart o cart actualizado");
+        // console.log(addToCart);
 
-        // let alreadyInCart = cart.findIndex((i) => i.id === id);
-        // // si el resultado del .findIndex es -1, entonces el Item no está en el carrito, entonces le hago un push
-        // // si encuentro un índice, actualizo la cantidad de ese Item en el carrito
-        // if (alreadyInCart === -1) {
-        //     const prodToCart = {
-        //         id: item.id,
-        //         img: item.img,
-        //         title: item.title,
-        //         price: item.price,
-        //         qty: qty,
-        //     };
-        //     setCart([...cart, prodToCart]);
-        // } else {
-        //     cart[alreadyInCart].qty = cart[alreadyInCart].qty + qty;
-        //     // console.log(cart[alreadyInCart].qty)
-        // }
+        let alreadyInCart = cart.findIndex((i) => i.id === addToCart.id);
+        // si el resultado del .findIndex es -1, entonces el Item no está en el carrito, entonces le hago un push
+        // si encuentro un índice, actualizo la cantidad de ese Item en el carrito
+        if (addToCart.id === "render") {
+            console.log("render");
+        } else if (alreadyInCart === -1) {
+            const prodToCart = {
+                id: addToCart.id,
+                img: addToCart.img,
+                title: addToCart.title,
+                price: addToCart.price,
+                qty: addToCart.qty,
+            };
+            setCart([...cart, prodToCart]);
+            console.log("item nuevo");
+            // console.log(cart)
+            // para que no vuelva a entrar al if con un id válido ya que se actualizó el estado "cart"
+            setAddToCart(cart0);
+        } else {
+            cart[alreadyInCart].qty = cart[alreadyInCart].qty + addToCart.qty;
+            console.log("ya en carrito");
+            // console.log(cart);
+        }
+    }, [addToCart, cart]);
 
-    },[addToCart])
-
+    useEffect(() => {
+        let total = 0;
+        cart.forEach((item) => {
+            total += item.qty;
+        });
+        setTotalQty(total);
+    },[cart, addToCart]);
 
 
     // cart.forEach(item=>{
@@ -52,7 +67,9 @@ export const CartProvider = ({ children }) => {
     // })
 
     return (
-        <CartContext.Provider value={{ cart, setCart, totalQty, setTotalQty, setAddToCart }}>
+        <CartContext.Provider
+            value={{ cart, setCart, totalQty, setTotalQty, setAddToCart }}
+        >
             {children}
         </CartContext.Provider>
     );

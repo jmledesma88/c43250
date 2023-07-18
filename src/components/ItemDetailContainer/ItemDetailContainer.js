@@ -24,10 +24,13 @@ const ItemDetailContainer = ({ item }) => {
         total += item.qty;
     });
 
-    const algo = {
+    const prod = {
         id: item.id,
-        qty: qty
-    }
+        img: item.img,
+        title: item.title,
+        price: item.price,
+        qty: qty,
+}
 
     const AddToCart = () => {
         let alreadyInCart = cart.findIndex((i) => i.id === id);
@@ -91,7 +94,7 @@ const ItemDetailContainer = ({ item }) => {
                         <Button onClick={() => AddToCart()} id={id}>
                             Add to cart
                         </Button>
-                        <Button onClick={() => setAddToCart(algo)}>Update Cart</Button>
+                        <Button onClick={() => setAddToCart(prod)}>Update Cart</Button>
                     </div>
                 </CardContent>
             {/* </CardActionArea> */}

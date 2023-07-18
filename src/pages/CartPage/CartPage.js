@@ -1,19 +1,7 @@
 import "./CartPage.css";
 
 import React from "react";
-import {
-    ButtonGroup,
-    Button,
-    TextField,
-    Box,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Typography,
-    IconButton,
-} from "@mui/material";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { Button, TextField } from "@mui/material";
 import { useState, useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
@@ -21,12 +9,7 @@ import { db } from "../../firebase/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 import OrderSuccessMsg from "../../components/OrderSuccessMsg/OrderSuccessMsg";
-
-// import Card from "@mui/material/Card";
-// import CardActions from "@mui/material/CardActions";
-// import CardContent from "@mui/material/CardContent";
-// import CardMedia from "@mui/material/CardMedia";
-// import Typography from "@mui/material/Typography";
+import CartReviewCard from "../../components/CartReviewCard/CartReviewCard";
 
 const initialState = {
     name: "",
@@ -67,74 +50,77 @@ const CartPage = () => {
 
     return (
         <div>
-            <h1>Cart</h1>
+            <h1>Cart Summary</h1>
             <div className="CartPage">
                 <div className="CartReview">
                     {cart.map((item) => {
                         return (
-                            <Card sx={{}} className="CartCard">
-                                <Box className="CartCardGrid">
-                                    <CardMedia
-                                        image={item.img}
-                                        title={item.title}
-                                        className="thmb"
-                                    />
-                                    <Box className="summary">
-                                        <CardContent>
-                                            <Typography
-                                                gutterBottom
-                                                variant="h6"
-                                                component="div"
-                                            >
-                                                {item.title}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2"
-                                                color="text.secondary"
-                                            >
-                                                {item.qty} x €{item.price}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <ButtonGroup
-                                                variant="outlined"
-                                                aria-label="outlined button group"
-                                            >
-                                                <Button
-                                                    // onClick={() =>
-                                                    //     item.qty > 1
-                                                    //         ? item.qty = item.qty-1
-                                                    //         : null
-                                                    // }
-                                                >
-                                                    -
-                                                </Button>
-                                                <Button
-                                                    style={{
-                                                        pointerEvents: "none",
-                                                    }}
-                                                >
-                                                    {item.qty}
-                                                </Button>
-                                                <Button
-                                                    // onClick={() =>
-                                                    //     item.qty = item.qty+1
-                                                    // }
-                                                >
-                                                    +
-                                                </Button>
-                                            </ButtonGroup>
-                                            <IconButton
-                                                aria-label="delete"
-                                                size="small"
-                                                className="deleteBtn"
-                                            >
-                                                <DeleteOutlineIcon fontSize="medium" />
-                                            </IconButton>{" "}
-                                        </CardActions>
-                                    </Box>
-                                </Box>
-                            </Card>
+                            <div key={item.id}>
+                                <CartReviewCard item={item} />
+                            </div>
+                            //     <Card sx={{}} className="CartCard" key={item.id}>
+                            //         <Box className="CartCardGrid">
+                            //             <CardMedia
+                            //                 image={item.img}
+                            //                 title={item.title}
+                            //                 className="thmb"
+                            //             />
+                            //             <Box className="summary">
+                            //                 <CardContent>
+                            //                     <Typography
+                            //                         gutterBottom
+                            //                         variant="h6"
+                            //                         component="div"
+                            //                     >
+                            //                         {item.title}
+                            //                     </Typography>
+                            //                     <Typography
+                            //                         variant="body2"
+                            //                         color="text.secondary"
+                            //                     >
+                            //                         {item.qty} x €{item.price} = €{item.qty*item.price}
+                            //                     </Typography>
+                            //                 </CardContent>
+                            //                 <CardActions sx={{justifyContent: "center"}}>
+                            //                     <ButtonGroup
+                            //                         variant="outlined"
+                            //                         aria-label="outlined button group"
+                            //                     >
+                            //                         <Button
+                            //                             // onClick={() =>
+                            //                             //     item.qty > 1
+                            //                             //         ? item.qty = item.qty-1
+                            //                             //         : null
+                            //                             // }
+                            //                         >
+                            //                             -
+                            //                         </Button>
+                            //                         <Button
+                            //                             style={{
+                            //                                 pointerEvents: "none",
+                            //                             }}
+                            //                         >
+                            //                             {item.qty}
+                            //                         </Button>
+                            //                         <Button
+                            //                             // onClick={() =>
+                            //                             //     item.qty = item.qty+1
+                            //                             // }
+                            //                         >
+                            //                             +
+                            //                         </Button>
+                            //                     </ButtonGroup>
+                            //                     <IconButton
+                            //                         aria-label="delete"
+                            //                         size="small"
+                            //                         className="deleteBtn"
+                            //                     >
+                            //                         <DeleteOutlineIcon fontSize="medium" />
+                            //                     </IconButton>{" "}
+                            //                 </CardActions>
+                            //             </Box>
+                            //         </Box>
+                            //     </Card>
                         );
                     })}
                 </div>

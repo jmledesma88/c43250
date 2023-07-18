@@ -54,14 +54,7 @@ const NavBar = () => {
     };
 
     const {totalQty} = useContext(CartContext);
-    // let totalQty = 0;
     
-
-    // cart && cart.forEach(item=>{
-    // cart.forEach(item=>{
-    // //     // totalPrice+= item.qty*item.price;
-    //     totalQty+= item.qty;
-    // })
 
     return (
         <AppBar position="static" id="NavBar">
