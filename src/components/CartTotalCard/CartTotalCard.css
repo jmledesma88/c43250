@@ -1,0 +1,12 @@
+.CartTotalCard{
+    height: 80px;
+    min-width: 250px;
+    max-width: 700px;
+    margin: 0px 20px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.CartTotalText{
+    margin: 0px !important;
+}

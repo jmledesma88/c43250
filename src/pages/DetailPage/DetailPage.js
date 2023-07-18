@@ -16,6 +16,7 @@ import {
 const DetailPage = () => {
     const [selectedItem, setSelectedItem] = useState([]);
 
+
     let { id } = useParams();
 
     useEffect(() => {

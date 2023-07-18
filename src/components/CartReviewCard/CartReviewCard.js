@@ -1,25 +1,61 @@
 import "./CartReviewCard.css";
 import React from "react";
-import { Card, Box, CardMedia, CardContent, Typography, CardActions, ButtonGroup, Button, IconButton} from "@mui/material";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import {
+    Card,
+    Box,
+    CardMedia,
+    CardContent,
+    Typography,
+    CardActions,
+    ButtonGroup,
+    Button,
+    IconButton,
+} from "@mui/material";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
-const CartReviewCard = ({item}) => {
+const CartReviewCard = ({ item }) => {
+    const { id, img, title, qty, price } = item;
+
+    const { setBtnUpId, setBtnDownId, setDeleteBtnId } = useContext(CartContext);
+    // const [btnUp, setBtnUp] = useState(false)
+
+    // const prod = {
+    //     id: id,
+    //     img: img,
+    //     title: title,
+    //     price: price,
+    //     qty: qty,
+    // };
+    // useEffect(()=>{
+    //     if(btnUp){
+    //         let itemIndex = cart.findIndex((i) => i.id === id);
+    //         cart[itemIndex].qty = cart[itemIndex].qty + 1;
+    //         setBtnUp(false);
+    //     } else{
+    //         console.log("nada")
+    //     }
+
+    // },[btnUp, cart, id]);
+
+    // const btnUp = () => {
+    //     let itemIndex = cart.findIndex((i) => i.id === id);
+    //     cart[itemIndex].qty = cart[itemIndex].qty + 1;
+
+    // }
+
     return (
-        <Card sx={{}} className="CartCard" key={item.id}>
+        <Card sx={{}} className="CartCard" key={id}>
             <Box className="CartCardGrid">
-                <CardMedia
-                    image={item.img}
-                    title={item.title}
-                    className="thmb"
-                />
+                <CardMedia image={img} title={title} className="thmb" />
                 <Box className="summary">
                     <CardContent>
                         <Typography gutterBottom variant="h6" component="div">
-                            {item.title}
+                            {title}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {item.qty} x €{item.price} = €
-                            {item.qty * item.price}
+                            {qty} x €{price} = €{qty * price}
                         </Typography>
                     </CardContent>
                     <CardActions sx={{ justifyContent: "center" }}>
@@ -27,34 +63,21 @@ const CartReviewCard = ({item}) => {
                             variant="outlined"
                             aria-label="outlined button group"
                         >
-                            <Button
-                            // onClick={() =>
-                            //     item.qty > 1
-                            //         ? item.qty = item.qty-1
-                            //         : null
-                            // }
-                            >
-                                -
-                            </Button>
+                            <Button onClick={()=> setBtnDownId(id)}>-</Button>
                             <Button
                                 style={{
                                     pointerEvents: "none",
                                 }}
                             >
-                                {item.qty}
+                                {qty}
                             </Button>
-                            <Button
-                            // onClick={() =>
-                            //     item.qty = item.qty+1
-                            // }
-                            >
-                                +
-                            </Button>
+                            <Button onClick={() => setBtnUpId(id)}>+</Button>
                         </ButtonGroup>
                         <IconButton
                             aria-label="delete"
                             size="small"
                             className="deleteBtn"
+                            onClick={()=> setDeleteBtnId(id)}
                         >
                             <DeleteOutlineIcon fontSize="medium" />
                         </IconButton>{" "}

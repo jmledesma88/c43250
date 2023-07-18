@@ -15,48 +15,21 @@ const ItemDetailContainer = ({ item }) => {
     const [qty, setQty] = useState(defaultQty);
 
     // traigo carrito del context
-    const { cart, setCart, setTotalQty, setAddToCart } = useContext(CartContext);
+    const { setAddToCart } = useContext(CartContext);
     // console.log(cart);
 
-    // calculo la cantidad de artículos actual en el carrito
-    let total = 0;
-    cart.forEach((item) => {
-        total += item.qty;
-    });
 
     const prod = {
-        id: item.id,
-        img: item.img,
-        title: item.title,
-        price: item.price,
+        id: id,
+        img: img,
+        title: title,
+        price: price,
         qty: qty,
-}
+    }
 
-    const AddToCart = () => {
-        let alreadyInCart = cart.findIndex((i) => i.id === id);
-        // si el resultado del .findIndex es -1, entonces el Item no está en el carrito, entonces le hago un push
-        // si encuentro un índice, actualizo la cantidad de ese Item en el carrito
-        if (alreadyInCart === -1) {
-            const prodToCart = {
-                id: item.id,
-                img: item.img,
-                title: item.title,
-                price: item.price,
-                qty: qty,
-            };
-            setCart([...cart, prodToCart]);
-        } else {
-            cart[alreadyInCart].qty = cart[alreadyInCart].qty + qty;
-            // console.log(cart[alreadyInCart].qty)
-        }
-
-        // actualizo la cantidad total de artículos en el carrito
-        setTotalQty(total+qty);
-    };
 
     return (
-        <Card className="ItemDetailContainer">
-            {/* <CardActionArea> */}
+        <Card className="ItemDetailContainer" id={id}>
                 <CardMedia component="img" image={img} alt={title} />
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
@@ -90,14 +63,9 @@ const ItemDetailContainer = ({ item }) => {
                         </ButtonGroup>
                     </div>
                     <div>
-                        {/* <Button onClick={() => setAddToCart(true)}> */}
-                        <Button onClick={() => AddToCart()} id={id}>
-                            Add to cart
-                        </Button>
-                        <Button onClick={() => setAddToCart(prod)}>Update Cart</Button>
+                        <Button onClick={() => setAddToCart(prod)}>Add to Cart</Button>
                     </div>
                 </CardContent>
-            {/* </CardActionArea> */}
         </Card>
     );
 };

@@ -10,6 +10,7 @@ import { collection, addDoc } from "firebase/firestore";
 
 import OrderSuccessMsg from "../../components/OrderSuccessMsg/OrderSuccessMsg";
 import CartReviewCard from "../../components/CartReviewCard/CartReviewCard";
+import CartTotalCard from "../../components/CartTotalCard/CartTotalCard";
 
 const initialState = {
     name: "",
@@ -21,6 +22,8 @@ const initialState = {
     email: "",
     emailcheck: "",
 };
+
+const incompleteForm = false;
 
 const CartPage = () => {
     const [values, setValues] = useState(initialState);
@@ -43,10 +46,9 @@ const CartPage = () => {
         setValues(initialState);
     };
 
-    const { cart } = useContext(CartContext);
+    const { cart, grandTotal } = useContext(CartContext);
+    console.log(grandTotal);
 
-    // Falta desarrollar relación con el item y actualización del carrito
-    // const [qty, setQty] = useState(1);
 
     return (
         <div>
@@ -58,124 +60,69 @@ const CartPage = () => {
                             <div key={item.id}>
                                 <CartReviewCard item={item} />
                             </div>
-                            //     <Card sx={{}} className="CartCard" key={item.id}>
-                            //         <Box className="CartCardGrid">
-                            //             <CardMedia
-                            //                 image={item.img}
-                            //                 title={item.title}
-                            //                 className="thmb"
-                            //             />
-                            //             <Box className="summary">
-                            //                 <CardContent>
-                            //                     <Typography
-                            //                         gutterBottom
-                            //                         variant="h6"
-                            //                         component="div"
-                            //                     >
-                            //                         {item.title}
-                            //                     </Typography>
-                            //                     <Typography
-                            //                         variant="body2"
-                            //                         color="text.secondary"
-                            //                     >
-                            //                         {item.qty} x €{item.price} = €{item.qty*item.price}
-                            //                     </Typography>
-                            //                 </CardContent>
-                            //                 <CardActions sx={{justifyContent: "center"}}>
-                            //                     <ButtonGroup
-                            //                         variant="outlined"
-                            //                         aria-label="outlined button group"
-                            //                     >
-                            //                         <Button
-                            //                             // onClick={() =>
-                            //                             //     item.qty > 1
-                            //                             //         ? item.qty = item.qty-1
-                            //                             //         : null
-                            //                             // }
-                            //                         >
-                            //                             -
-                            //                         </Button>
-                            //                         <Button
-                            //                             style={{
-                            //                                 pointerEvents: "none",
-                            //                             }}
-                            //                         >
-                            //                             {item.qty}
-                            //                         </Button>
-                            //                         <Button
-                            //                             // onClick={() =>
-                            //                             //     item.qty = item.qty+1
-                            //                             // }
-                            //                         >
-                            //                             +
-                            //                         </Button>
-                            //                     </ButtonGroup>
-                            //                     <IconButton
-                            //                         aria-label="delete"
-                            //                         size="small"
-                            //                         className="deleteBtn"
-                            //                     >
-                            //                         <DeleteOutlineIcon fontSize="medium" />
-                            //                     </IconButton>{" "}
-                            //                 </CardActions>
-                            //             </Box>
-                            //         </Box>
-                            //     </Card>
                         );
                     })}
+                    <CartTotalCard grandTotal={grandTotal} />
                 </div>
                 <form className="CartForm" onSubmit={onSubmit}>
                     <TextField
-                        placeholder="Name"
+                        required
                         name="name"
+                        label="Name"
                         className="CartFormInput"
                         value={values.name}
                         onChange={handleOnChange}
                     />
                     <TextField
-                        placeholder="Surname"
+                        required
                         name="surname"
+                        label="Surname"
                         className="CartFormInput"
                         value={values.surname}
                         onChange={handleOnChange}
                     />
                     <TextField
-                        placeholder="Address"
+                        required
                         name="address1"
+                        label="Address"
                         className="CartFormInput"
                         value={values.address1}
                         onChange={handleOnChange}
                     />
                     <TextField
-                        placeholder="Foor, Apt, Unit"
+                        label="Foor, Apt, Unit"
                         name="address2"
                         className="CartFormInput"
                         value={values.address2}
                         onChange={handleOnChange}
                     />
                     <TextField
-                        placeholder="City"
+                        required
+                        label="City"
                         name="city"
                         className="CartFormInput"
                         value={values.city}
                         onChange={handleOnChange}
                     />
                     <TextField
-                        placeholder="678912345"
+                        required
+                        label="Phone Number"
                         name="phone"
                         className="CartFormInput"
                         value={values.phone}
                         onChange={handleOnChange}
                     />
                     <TextField
-                        placeholder="email"
+                        required
+                        label="E-Mail"
                         name="email"
                         className="CartFormInput"
                         value={values.email}
                         onChange={handleOnChange}
                     />
                     <TextField
-                        placeholder="confirm email"
+                        required
+                        label="Confirm E-Mail"
                         name="emailcheck"
                         className="CartFormInput"
                         value={values.emailcheck}
@@ -186,6 +133,7 @@ const CartPage = () => {
                         type="submit"
                         variant="outlined"
                         color="success"
+                        disabled={incompleteForm}
                     >
                         Submit
                     </Button>
