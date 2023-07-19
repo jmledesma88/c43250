@@ -258,7 +258,7 @@ const NavBar = () => {
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Link to="/cart">
-                            <IconButton title="View Cart" sx={{ p: 0 }}>
+                            <IconButton title="View Cart" sx={{ p: 0, color: "white" }}>
                                 <CartWidget />
                                 {totalQty>0 ? totalQty : null}
                             </IconButton>

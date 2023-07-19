@@ -1,12 +1,11 @@
-import { Alert, Stack } from "@mui/material";
+import { Alert } from "@mui/material";
+import "./OrderSuccessMsg.css"
 
 const OrderSuccessMsg = ({orderId}) => {
     return(
-        <Stack sx={{width: "100%"}} spacing={2}>
-            <Alert severity="success">
+            <Alert variant="outlined" severity="success"  className="SuccessMsg">
                 Your order has been placed successfully! Your order number is {orderId}.
             </Alert>
-        </Stack>
     );
 };
 

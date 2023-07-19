@@ -19,31 +19,6 @@ const CartReviewCard = ({ item }) => {
     const { id, img, title, qty, price } = item;
 
     const { setBtnUpId, setBtnDownId, setDeleteBtnId } = useContext(CartContext);
-    // const [btnUp, setBtnUp] = useState(false)
-
-    // const prod = {
-    //     id: id,
-    //     img: img,
-    //     title: title,
-    //     price: price,
-    //     qty: qty,
-    // };
-    // useEffect(()=>{
-    //     if(btnUp){
-    //         let itemIndex = cart.findIndex((i) => i.id === id);
-    //         cart[itemIndex].qty = cart[itemIndex].qty + 1;
-    //         setBtnUp(false);
-    //     } else{
-    //         console.log("nada")
-    //     }
-
-    // },[btnUp, cart, id]);
-
-    // const btnUp = () => {
-    //     let itemIndex = cart.findIndex((i) => i.id === id);
-    //     cart[itemIndex].qty = cart[itemIndex].qty + 1;
-
-    // }
 
     return (
         <Card sx={{}} className="CartCard" key={id}>

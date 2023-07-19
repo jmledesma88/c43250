@@ -1,0 +1,5 @@
+.SuccessMsg{
+    max-width: 300px;
+    display: inline-flex;
+    justify-content: center;
+}

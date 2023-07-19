@@ -1,6 +1,6 @@
 import "./CartPage.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, TextField } from "@mui/material";
 import { useState, useContext } from "react";
 import { CartContext } from "../../context/CartContext";
@@ -23,12 +23,43 @@ const initialState = {
     emailcheck: "",
 };
 
-const incompleteForm = false;
 
 const CartPage = () => {
     const [values, setValues] = useState(initialState);
 
     const [orderId, setOrderId] = useState(null);
+
+    const [incompleteForm, setIncompleteForm] = useState(true);
+
+    const { cart, grandTotal, setCart } = useContext(CartContext);
+    console.log(grandTotal);
+    console.log(cart.length)
+
+    const checkForm = () => {
+        if (
+            values.address1 === "" ||
+            values.city === "" ||
+            values.email === "" ||
+            values.emailcheck === "" ||
+            values.name === "" ||
+            values.phone === "" ||
+            values.surname === ""
+        ) {
+            setIncompleteForm(true);
+            console.log("incompleto");
+        } else if (values.email !== values.emailcheck) {
+            setIncompleteForm(true);
+            console.log("email diferente");
+        } else if (cart.length === 0) {
+            setIncompleteForm(true);
+        } else {
+            setIncompleteForm(false);
+            console.log("form ok");
+        }
+    };
+    useEffect(() => {
+        checkForm();
+    });
 
     const handleOnChange = (e) => {
         const { value, name } = e.target;
@@ -38,17 +69,19 @@ const CartPage = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log(values);
+        cart.forEach(obj => {
+            delete obj['img'];
+        });
+        
+        console.log(cart);
         const docRef = await addDoc(collection(db, "ordersCollection"), {
-            values,
+            values, cart,
         });
         setOrderId(docRef.id);
         // console.log("Document written with ID: ", docRef.id);
         setValues(initialState);
+        setCart([]);
     };
-
-    const { cart, grandTotal } = useContext(CartContext);
-    console.log(grandTotal);
-
 
     return (
         <div>
@@ -138,8 +171,10 @@ const CartPage = () => {
                         Submit
                     </Button>
                 </form>
+            </div>
+            <div sx={{display: "flex"}}>
+                {orderId ? <OrderSuccessMsg orderId={orderId}/> : null}
 
-                {orderId ? <OrderSuccessMsg orderId={orderId} /> : null}
             </div>
         </div>
     );
